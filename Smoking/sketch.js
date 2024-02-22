@@ -31,7 +31,6 @@ function setup() {
   let bothSexesData = cleanData.filter(row => row.Sex === "Both sexes");
   let male = cleanData.filter(row => row.Sex === "Male");
   let female = cleanData.filter(row => row.Sex === "Female");
-console.log(male)
 
 
 // console.log(male)
