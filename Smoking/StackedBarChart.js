@@ -29,9 +29,22 @@ class StackedBarChart {
     this.showValue = obj.showValue
     this.textColour = obj.textColour
 // Scaling
-    this.maxValue = max(this.data.map(d => [this.yValues[1][1].VALUE]));
+
+this.maxValue = 0;
+
+for (let i = 0; i < this.data.length; i++) {
+  let value = parseFloat(this.data[i].VALUE);
+  if (!isNaN(value) && value > this.maxValue) {
+    this.maxValue = value;
+  }
+}
+
+
+console.log(`Max Value: ${this.maxValue}`);
+
+
     this.scale = this.chartHeight / this.maxValue;
-    console.log(this.data)
+    console.log(this.scale)
     // this.chartType = obj.chartType
     // console.log(this.data[1].Sex)
   }
@@ -90,24 +103,30 @@ class StackedBarChart {
   }
 // bars                                       
     let gap = (this.chartWidth - (this.data.length * this.barWidth))/(this.data.length+1)
-    translate(gap,0);
     push()
-    for (let i = 0; i < this.data.length; i++) {
-    noStroke()
+    translate(gap,0);
 
- 
+    for (let i = 0; i < this.data.length; i++) {
+      fill(this.barFill);
+
+
+ push()
     for(let j = 0; j<this.yValues.length; j++){
-      let barHeight = this.data[i].VALUE+(+this.yValues[j][i].VALUE)
-      console.log(-barHeight)
-      rect(0,10,this.barWidth,-barHeight)
+      let barHeight = -this.data[i].VALUE  +this.yValues[j][i].VALUE*this.scale;
+      // console.log(this.data.length)
+      fill(this.fillColours[i % this.fillColours.length]);
+console.log(barHeight)
+      rect(0,0,this.barWidth,-barHeight)
       translate(0,-barHeight)
     }
+    
+pop()
 
     // when i exceeds the length of fillcolours[] it will wrap around and start looping again
 
     //  value on top of bars
      if(this.showValue) {
-      text([this.data[i].VALUE],0,(-this.data[i][this.yValue]*this.scale)-5,)
+      text([this.data[i].VALUE],0,(-this.data[i][this.yValues]*this.scale),)
      }
 
      translate(gap + this.barWidth,0)
