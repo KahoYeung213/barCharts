@@ -1,6 +1,7 @@
 let barCharts = [];
 let horizontalBarCharts = [];
 let stackedBarCharts = [];
+let scatterPlotCharts = [];
 let data;
 let cleanData = [];
 let numRows;
@@ -20,6 +21,8 @@ function preload() {
 function setup() {
   createCanvas(canvasWidth, canvasHeight)
   background("#24263d")
+
+  
  
   // Text(cleanData[1].Age_Group,this.xPos,this.yPos)
 
@@ -45,7 +48,7 @@ function setup() {
     chartWidth: 600,
 
     xPos: 800,
-    yPos: 650,
+    yPos: 150,
 
     
     axisLineColour: "#fff9ff",
@@ -75,7 +78,7 @@ let horizontalBarchart01 = {
   chartWidth: 600,
 
   xPos: 100,
-  yPos: 650,
+  yPos: 1050,
 
   
   axisLineColour: "#fff9ff",
@@ -106,7 +109,36 @@ let stackedBarchart01 = {
   chartWidth: 600,
 
   xPos: 300,
-  yPos: 650,
+  yPos: 850,
+
+  
+  axisLineColour: "#fff9ff",
+  barWidth: 25,
+  barFill: "#ca7ccf",
+  lineAxisThickness: 3,
+  numTicks: 9,
+  rounding: false,
+  decimal: 0,
+  tickGap: 5,
+  textColour:"#E1A6FD",
+  fillColours: ["#F3E3FB","#ECCBFC","#E1A6FD","#D47FFD","#C756FD"],
+  showValue:true,
+// text
+  valueTextSize:14,
+  titleSize: 30,
+  xLabelName: "Age Group",
+  yValues: [male,female],
+  
+}
+
+let scatterPlotChart01 = {
+    
+  data: bothSexesData,
+  chartHeight: 500,
+  chartWidth: 600,
+
+  xPos: 700,
+  yPos: 50,
 
   
   axisLineColour: "#fff9ff",
@@ -123,14 +155,16 @@ let stackedBarchart01 = {
 // text
   valueTextSize:14,
   titleSize: 30,
+  chartTitle:"% of all people who smoke",
   xLabelName: "Age Group",
-  yValues: [male,female],
-  
+  yValue: "VALUE",
+
 }
 
   barCharts.push(new Barchart(barChart01));
   horizontalBarCharts.push(new HorizontalBarChart(horizontalBarchart01));
   stackedBarCharts.push(new StackedBarChart(stackedBarchart01));
+  scatterPlotCharts.push(new ScatterPlotChart(scatterPlotChart01));
 
 
  
@@ -138,9 +172,11 @@ let stackedBarchart01 = {
 
 
 function draw() {
+  stackedBarCharts.forEach(bar => bar.render())
   barCharts.forEach(bar => bar.render())
   horizontalBarCharts.forEach(bar => bar.render())
-  stackedBarCharts.forEach(bar => bar.render())
+  scatterPlotCharts.forEach(bar => bar.render())
+
 
 }
  

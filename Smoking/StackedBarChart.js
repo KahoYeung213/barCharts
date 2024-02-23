@@ -40,11 +40,10 @@ for (let i = 0; i < this.data.length; i++) {
 }
 
 
-console.log(`Max Value: ${this.maxValue}`);
 
 
-    this.scale = this.chartHeight / this.maxValue;
-    console.log(this.scale)
+    this.scale = (this.chartHeight / this.maxValue);
+    console.log(this.maxValue)
     // this.chartType = obj.chartType
     // console.log(this.data[1].Sex)
   }
@@ -59,7 +58,7 @@ console.log(`Max Value: ${this.maxValue}`);
         let increment = this.numTicks - remainder;
         this.maxValue += increment;
       }
-      this.scale = this.chartHeight / this.maxValue;
+      console.log(this.scale)
     }
 
 
@@ -115,7 +114,7 @@ console.log(`Max Value: ${this.maxValue}`);
       let barHeight = -this.data[i].VALUE  +this.yValues[j][i].VALUE*this.scale;
       // console.log(this.data.length)
       fill(this.fillColours[i % this.fillColours.length]);
-console.log(barHeight)
+// console.log(barHeight)
       rect(0,0,this.barWidth,-barHeight)
       translate(0,-barHeight)
     }
@@ -126,7 +125,7 @@ pop()
 
     //  value on top of bars
      if(this.showValue) {
-      text([this.data[i].VALUE],0,(-this.data[i][this.yValues]*this.scale),)
+      text([this.data[i].VALUE],0,(-this.data[i][this.yValues]),)
      }
 
      translate(gap + this.barWidth,0)
