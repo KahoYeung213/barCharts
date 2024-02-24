@@ -56,7 +56,7 @@ function setup() {
     barFill: "#ca7ccf",
     lineAxisThickness: 3,
     numTicks: 9,
-    rounding: true,
+    rounding: false,
     decimal: 0,
     tickGap: 5,
     textColour:"#E1A6FD",
@@ -112,7 +112,7 @@ let stackedBarchart01 = {
   yPos: 850,
 
   
-  axisLineColour: "#fff9ff",
+  axisLineColour: "#8481e6",
   barWidth: 25,
   barFill: "#ca7ccf",
   lineAxisThickness: 3,
@@ -146,7 +146,7 @@ let scatterPlotChart01 = {
   barFill: "#ca7ccf",
   lineAxisThickness: 3,
   numTicks: 9,
-  rounding: true,
+  rounding: false,
   decimal: 0,
   tickGap: 5,
   textColour:"#E1A6FD",

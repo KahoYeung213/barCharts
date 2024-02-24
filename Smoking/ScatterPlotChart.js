@@ -94,27 +94,24 @@ class ScatterPlotChart {
   // bars                                       
       let gap = (this.chartWidth - (this.data.length * this.barWidth))/(this.data.length+1)
       translate(gap,0);
-      for (let i = 0; i < this.data.length; i++) {
-      noStroke()
-  
-      // for(let j = -1; j<i; j++){
-      //   push()
-      //   this.yValue
-      //   fill("#ff0000")
-      //   stroke(10)
-      //   rect(0,-this.data[i][this.yValue]*this.scale/this.numTicks,this.barWidth, -this.data[i][this.yValue]*this.scale)
-      //   pop()
-      // }
-  
-      
-      // when i exceeds the length of fillcolours[] it will wrap around and start looping again
-      fill(this.fillColours[i % this.fillColours.length])
-      
-       ellipse(0,-this.data[i][this.yValue]*this.scale,10,10 )
-  
-      //  value on top of bars
-       if(this.showValue) {
-        text([this.data[i].VALUE],0,(-this.data[i][this.yValue]*this.scale)-5,)
+
+  for (let i = 0; i < this.data.length - 1; i++) {
+  noStroke();
+  fill(this.fillColours[i % this.fillColours.length]);
+
+  ellipse(0, -this.data[i][this.yValue] * this.scale, 10, 10);
+
+  push()
+  stroke(this.axisLineColour);
+  strokeWeight(1)
+  line(0, -this.data[i][this.yValue] * this.scale, this.barWidth+20, -this.data[i + 1][this.yValue] * this.scale);
+  pop()
+// console.log(this.barWidth)
+
+
+   
+      if(this.showValue) {
+        text([this.data[i].VALUE],10,(-this.data[i][this.yValue]*this.scale))
        }
   
        translate(gap + this.barWidth,0)

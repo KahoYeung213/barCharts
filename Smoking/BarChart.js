@@ -46,7 +46,7 @@ class Barchart {
     noStroke()
     textAlign(CENTER, CENTER)
     fill(this.textColour)
-    text([this.chartTitle],canvasWidth/2,-this.chartHeight)
+    // text([this.chartTitle],canvasWidth/2,-this.chartHeight)
     
     pop()
 

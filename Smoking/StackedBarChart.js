@@ -63,18 +63,20 @@ for (let i = 0; i < this.data.length; i++) {
 
 
     stroke(this.axisLineColour)
-    push()
-    strokeWeight(this.lineAxisThickness)
     translate(this.xPos,this.yPos);
     push()
+    noStroke();
+
     textSize(this.titleSize)
-    noStroke()
     fill(this.textColour)
     text(this.data[1].Sex,this.chartWidth/2,-this.chartHeight-30)
     pop()
+    push()
+   
+    stroke(this.fillColours)
     line(0,0,0,-this.chartHeight);
     line(0,0,this.chartWidth,0)
- 
+    pop()
 // Y axis ticks and numbers
 
 
@@ -87,7 +89,6 @@ for (let i = 0; i < this.data.length; i++) {
       textSize(this.valueTextSize)
       textFont(fontThin)
       push()
-      noStroke();
       fill(this.textColour);
       textAlign(RIGHT, CENTER);
       translate(0, i * (-this.chartHeight / this.numTicks))
@@ -95,7 +96,11 @@ for (let i = 0; i < this.data.length; i++) {
 
       // fixes the decimals
       let yValue = (tickGap*i).toFixed(this.decimal)
+
+      noStroke();
+
       text(yValue, -15, 0);
+      
       pop();
 
       // if (this.chartType = "full")
@@ -111,12 +116,13 @@ for (let i = 0; i < this.data.length; i++) {
 
  push()
     for(let j = 0; j<this.yValues.length; j++){
-      let barHeight = -this.data[i].VALUE  +this.yValues[j][i].VALUE*this.scale;
+      let barHeight = (-this.data[i].VALUE +this.yValues[j][i].VALUE*-this.scale/this.yValues.length);
       // console.log(this.data.length)
+      console.log(this.scale)
       fill(this.fillColours[i % this.fillColours.length]);
 // console.log(barHeight)
-      rect(0,0,this.barWidth,-barHeight)
-      translate(0,-barHeight)
+      rect(0,0,this.barWidth,barHeight)
+      translate(0,barHeight)
     }
     
 pop()
@@ -132,8 +138,10 @@ pop()
      push()
      angleMode(DEGREES)
      rotate(20)
-     fill(this.fillColours[(this.fillColours.length + i) % this.fillColours.length])
+     fill(this.fillColours[i % this.fillColours.length]);
      textAlign(BOTTOM ,CENTER)
+     noStroke();
+
      text(this.data[i][this.xLabelName], -this.barWidth, 30);
      pop()
     }
