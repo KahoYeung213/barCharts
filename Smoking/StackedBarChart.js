@@ -20,6 +20,8 @@ class StackedBarChart {
     this.decimal = obj.decimal
     this.rounding = obj.rounding
     this.fillColours = obj.fillColours
+    this.fillColours2 = obj.fillColours2
+    this.avgValue = obj.avgValue
 
     this.valueTextSize = obj.valueTextSize
     this.titleSize = obj.titleSize
@@ -33,18 +35,14 @@ class StackedBarChart {
 this.maxValue = 0;
 
 for (let i = 0; i < this.data.length; i++) {
-  let value = parseFloat(this.data[i].VALUE);
+  let value = parseInt(this.data[i].VALUE);
   if (!isNaN(value) && value > this.maxValue) {
     this.maxValue = value;
   }
 }
 
-
-
-
     this.scale = (this.chartHeight / this.maxValue);
     console.log(this.maxValue)
-    // this.chartType = obj.chartType
     // console.log(this.data[1].Sex)
   }
 
@@ -103,7 +101,6 @@ for (let i = 0; i < this.data.length; i++) {
       
       pop();
 
-      // if (this.chartType = "full")
   }
 // bars                                       
     let gap = (this.chartWidth - (this.data.length * this.barWidth))/(this.data.length+1)
@@ -111,23 +108,31 @@ for (let i = 0; i < this.data.length; i++) {
     translate(gap,0);
 
     for (let i = 0; i < this.data.length; i++) {
-      fill(this.barFill);
+      push();
+      let avgHeight = 0; // Initialize average height
+      for (let j = 0; j < this.yValues.length; j++) {
+        let barHeight = (-this.data[i].VALUE + this.yValues[j][i].VALUE * -this.scale / this.yValues.length);
+        // Set fill color for top layer bars
+        if (j === 0) {
+          fill(this.fillColours[i % this.fillColours.length]);
+        } else {
+          fill(this.fillColours2[i % this.fillColours2.length]);
+        }
+        rect(0, 0, this.barWidth, barHeight);
+        avgHeight += barHeight; // Accumulate the heights
+        translate(0, barHeight);
+      }
+      avgHeight /= this.yValues.length; // Calculate average height
 
-
- push()
-    for(let j = 0; j<this.yValues.length; j++){
-      let barHeight = (-this.data[i].VALUE +this.yValues[j][i].VALUE*-this.scale/this.yValues.length);
-      // console.log(this.data.length)
-      console.log(this.scale)
-      fill(this.fillColours[i % this.fillColours.length]);
-// console.log(barHeight)
-      rect(0,0,this.barWidth,barHeight)
-      translate(0,barHeight)
-    }
+      stroke(255); // Set line color
+        if(this.avgValue){
+          fill(255,0,0)
+          ellipse(this.barWidth/2, -avgHeight, 10, 10);
+        }
+      pop();
     
-pop()
-
-    // when i exceeds the length of fillcolours[] it will wrap around and start looping again
+    
+    
 
     //  value on top of bars
      if(this.showValue) {

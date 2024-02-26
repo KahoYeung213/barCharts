@@ -33,7 +33,6 @@ class HorizontalBarChart {
     this.scale = this.chartWidth / this.maxValue;
 
     // this.chartType = obj.chartType
-    // console.log(this.data[1].Sex)
   }
 
 

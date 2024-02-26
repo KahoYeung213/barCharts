@@ -6,27 +6,27 @@ let data;
 let cleanData = [];
 let numRows;
 let fillColours = [];
-const canvasWidth ="1900";
-const canvasHeight ="1900";
+const canvasWidth ="2900";
+const canvasHeight ="2900";
 
 let fontRegular;
 let fontBold;
 
 function preload() {
   data = loadTable("data/HIS09.20240217T000239.csv", "csv", "header");
-  fontBold = loadFont('Fonts/Montserrat-Bold.ttf')
-  fontThin = loadFont('Fonts/Montserrat-Regular.ttf')
+  fontBold = loadFont('Fonts/Montserrat-Bold.ttf');
+  fontThin = loadFont('Fonts/Montserrat-Regular.ttf');
 }
 
 function setup() {
-  createCanvas(canvasWidth, canvasHeight)
-  background("#24263d")
+  createCanvas(canvasWidth, canvasHeight);
+  background("#24263d");
 
   
  
   // Text(cleanData[1].Age_Group,this.xPos,this.yPos)
 
-  numRows = data.rows.length
+  numRows = data.rows.length;
   for (let i = 0; i < numRows; i++) {
    cleanData.push(data.rows[i].obj);
   }
@@ -40,16 +40,46 @@ function setup() {
 
 
   
+let scatterPlotChart01 = {
+    
+  data: bothSexesData,
+  chartHeight: 500,
+  chartWidth: 600,
 
+  xPos: 700,
+  yPos: 50,
+
+
+  
+  axisLineColour: "#fff9ff",
+  barWidth: 25,
+  barFill: "#ca7ccf",
+  lineAxisThickness: 3,
+  numTicks: 9,
+  rounding: false,
+  decimal: 0,
+  tickGap: 5,
+  textColour:"#E1A6FD",
+  fillColours: ["#F3E3FB","#ECCBFC","#E1A6FD","#D47FFD","#C756FD"],
+  showValue:true,
+// text
+  valueTextSize:14,
+  titleSize: 30,
+  chartTitle:"% of all people who smoke",
+  xLabelName: "Age Group",
+  yValue: "VALUE",
+
+}
   let barChart01 = {
     
     data: female,
+
+
     chartHeight: 500,
     chartWidth: 600,
-
+  
     xPos: 800,
-    yPos: 150,
-
+      yPos: 150,
     
     axisLineColour: "#fff9ff",
     barWidth: 25,
@@ -61,6 +91,38 @@ function setup() {
     tickGap: 5,
     textColour:"#E1A6FD",
     fillColours: ["#F3E3FB","#ECCBFC","#E1A6FD","#D47FFD","#C756FD"],
+
+    showValue:true,
+// text
+    valueTextSize:14,
+    titleSize: 30,
+    chartTitle:"% of all people who smoke",
+    xLabelName: "Age Group",
+    yValue: "VALUE",
+
+  }
+
+  let barChart02 = {
+    
+    data: male,
+    chartHeight: 600,
+    chartWidth: 800,
+
+    xPos: 800,
+    yPos: 900,
+
+    
+    axisLineColour: "#fff9ff",
+    barWidth: 25,
+    barFill: "#ca7ccf",
+    lineAxisThickness: 3,
+    numTicks: 9,
+    rounding: true,
+    decimal: 0,
+    tickGap: 5,
+    textColour:"#E1A6FD",
+    fillColours: ["#F3E3FB","#ECCBFC","#E1A6FD","#D47FFD","#C756FD"],
+
     showValue:true,
 // text
     valueTextSize:14,
@@ -102,6 +164,37 @@ let horizontalBarchart01 = {
   
 }
 
+let horizontalBarchart02 = {
+    
+  data: female,
+  chartHeight: 500,
+  chartWidth: 600,
+
+  xPos: 100,
+  yPos: 850,
+
+  
+  axisLineColour: "#fff9ff",
+  barWidth: 15,
+  barFill: "#ca7ccf",
+  lineAxisThickness: 3,
+  numTicks: 9,
+  rounding: false,
+  decimal: 0,
+  tickGap: 5,
+  textColour:"#E1A6FD",
+  fillColours: ["#F3E3FB","#ECCBFC","#E1A6FD","#D47FFD","#C756FD"],
+  showValue:true,
+// text
+  valueTextSize:14,
+  titleSize: 30,
+  yValue: "VALUE",
+
+  xLabelName: "Age Group",
+  // chartType: "full"
+  
+}
+
 let stackedBarchart01 = {
     
   data: bothSexesData,
@@ -121,50 +214,27 @@ let stackedBarchart01 = {
   decimal: 0,
   tickGap: 5,
   textColour:"#E1A6FD",
-  fillColours: ["#F3E3FB","#ECCBFC","#E1A6FD","#D47FFD","#C756FD"],
-  showValue:true,
+  fillColours2: ["#e8b715","#dbc51f","#eddf77","#f5edae","#fff9cc"],
+  fillColours: ["#C756FD","#D47FFD","#ECCBFC","#E1A6FD","#F3E3FB"],
+  avgValue:true,
+
 // text
   valueTextSize:14,
   titleSize: 30,
   xLabelName: "Age Group",
-  yValues: [male,female],
+  yValues: [male,female]
   
 }
 
-let scatterPlotChart01 = {
-    
-  data: bothSexesData,
-  chartHeight: 500,
-  chartWidth: 600,
 
-  xPos: 700,
-  yPos: 50,
 
-  
-  axisLineColour: "#fff9ff",
-  barWidth: 25,
-  barFill: "#ca7ccf",
-  lineAxisThickness: 3,
-  numTicks: 9,
-  rounding: false,
-  decimal: 0,
-  tickGap: 5,
-  textColour:"#E1A6FD",
-  fillColours: ["#F3E3FB","#ECCBFC","#E1A6FD","#D47FFD","#C756FD"],
-  showValue:true,
-// text
-  valueTextSize:14,
-  titleSize: 30,
-  chartTitle:"% of all people who smoke",
-  xLabelName: "Age Group",
-  yValue: "VALUE",
 
-}
-
+  scatterPlotCharts.push(new ScatterPlotChart(scatterPlotChart01));
   barCharts.push(new Barchart(barChart01));
   horizontalBarCharts.push(new HorizontalBarChart(horizontalBarchart01));
+  barCharts.push(new Barchart(barChart02));
+  horizontalBarCharts.push(new HorizontalBarChart(horizontalBarchart02));
   stackedBarCharts.push(new StackedBarChart(stackedBarchart01));
-  scatterPlotCharts.push(new ScatterPlotChart(scatterPlotChart01));
 
 
  

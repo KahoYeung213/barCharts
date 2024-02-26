@@ -33,7 +33,6 @@ class Barchart {
     this.scale = this.chartHeight / this.maxValue;
 
     // this.chartType = obj.chartType
-    // console.log(this.data[1].Sex)
   }
 
 
@@ -105,15 +104,6 @@ class Barchart {
     translate(gap,0);
     for (let i = 0; i < this.data.length; i++) {
     noStroke()
-
-    // for(let j = -1; j<i; j++){
-    //   push()
-    //   this.yValue
-    //   fill("#ff0000")
-    //   stroke(10)
-    //   rect(0,-this.data[i][this.yValue]*this.scale/this.numTicks,this.barWidth, -this.data[i][this.yValue]*this.scale)
-    //   pop()
-    // }
 
     
     // when i exceeds the length of fillcolours[] it will wrap around and start looping again

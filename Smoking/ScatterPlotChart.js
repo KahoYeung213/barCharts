@@ -32,14 +32,11 @@ class ScatterPlotChart {
       this.maxValue = max(this.data.map(d => d[this.yValue]));
       this.scale = this.chartHeight / this.maxValue;
   
-      // this.chartType = obj.chartType
-      // console.log(this.data[1].Sex)
-    }
+      }
   
   
   
     render(){
-      // Chart Header
      
       
       // if max value / numticks = 0 stop, else add 1 to max value
@@ -89,7 +86,6 @@ class ScatterPlotChart {
         text(yValue, -15, 0);
         pop();
   
-        // if (this.chartType = "full")
     }
   // bars                                       
       let gap = (this.chartWidth - (this.data.length * this.barWidth))/(this.data.length+1)
@@ -104,11 +100,9 @@ class ScatterPlotChart {
   push()
   stroke(this.axisLineColour);
   strokeWeight(1)
-  line(0, -this.data[i][this.yValue] * this.scale, this.barWidth+20, -this.data[i + 1][this.yValue] * this.scale);
+  line(0, -this.data[i][this.yValue] * this.scale, this.barWidth+gap, -this.data[i + 1][this.yValue] * this.scale);
   pop()
 // console.log(this.barWidth)
-
-
    
       if(this.showValue) {
         text([this.data[i].VALUE],10,(-this.data[i][this.yValue]*this.scale))
