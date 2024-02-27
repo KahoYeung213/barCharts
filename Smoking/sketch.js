@@ -1,7 +1,7 @@
 let barCharts = [];
 let horizontalBarCharts = [];
 let stackedBarCharts = [];
-let scatterPlotCharts = [];
+let lineGraph = [];
 let data;
 let cleanData = [];
 let numRows;
@@ -15,13 +15,12 @@ let fontBold;
 function preload() {
   data = loadTable("data/HIS09.20240217T000239.csv", "csv", "header");
   fontBold = loadFont('Fonts/Montserrat-Bold.ttf');
-  fontThin = loadFont('Fonts/Montserrat-Regular.ttf');
+  fontThin = loadFont('Fonts/Montserrat-Thin.ttf');
 }
 
 function setup() {
   createCanvas(canvasWidth, canvasHeight);
   background("#24263d");
-
   
  
   // Text(cleanData[1].Age_Group,this.xPos,this.yPos)
@@ -40,14 +39,14 @@ function setup() {
 
 
   
-let scatterPlotChart01 = {
+let lineGraph01 = {
     
   data: bothSexesData,
   chartHeight: 500,
   chartWidth: 600,
 
-  xPos: 700,
-  yPos: 50,
+  xPos: 900,
+  yPos: 100,
 
 
   
@@ -78,8 +77,8 @@ let scatterPlotChart01 = {
     chartHeight: 500,
     chartWidth: 600,
   
-    xPos: 800,
-      yPos: 150,
+    xPos: 1000,
+      yPos: 850,
     
     axisLineColour: "#fff9ff",
     barWidth: 25,
@@ -108,8 +107,8 @@ let scatterPlotChart01 = {
     chartHeight: 600,
     chartWidth: 800,
 
-    xPos: 800,
-    yPos: 900,
+    xPos: 1000,
+    yPos: 1700,
 
     
     axisLineColour: "#fff9ff",
@@ -140,7 +139,7 @@ let horizontalBarchart01 = {
   chartWidth: 600,
 
   xPos: 100,
-  yPos: 1050,
+  yPos: 1750,
 
   
   axisLineColour: "#fff9ff",
@@ -207,7 +206,7 @@ let stackedBarchart01 = {
   
   axisLineColour: "#8481e6",
   barWidth: 25,
-  barFill: "#ca7ccf",
+  barFill: "#ff0000",
   lineAxisThickness: 3,
   numTicks: 9,
   rounding: false,
@@ -222,14 +221,18 @@ let stackedBarchart01 = {
   valueTextSize:14,
   titleSize: 30,
   xLabelName: "Age Group",
-  yValues: [male,female]
+  yValues: [male,female],
+  chartTitle:"% of all smokers by Age Group",
+  legendXAxis:0,
+  legendYAxis:130,
+  legendPadding:30
   
 }
 
 
 
 
-  scatterPlotCharts.push(new ScatterPlotChart(scatterPlotChart01));
+  lineGraph.push(new LineGraph(lineGraph01));
   barCharts.push(new Barchart(barChart01));
   horizontalBarCharts.push(new HorizontalBarChart(horizontalBarchart01));
   barCharts.push(new Barchart(barChart02));
@@ -245,7 +248,7 @@ function draw() {
   stackedBarCharts.forEach(bar => bar.render())
   barCharts.forEach(bar => bar.render())
   horizontalBarCharts.forEach(bar => bar.render())
-  scatterPlotCharts.forEach(bar => bar.render())
+  lineGraph.forEach(bar => bar.render())
 
 
 }

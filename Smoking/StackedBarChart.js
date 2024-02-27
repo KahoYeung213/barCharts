@@ -30,6 +30,9 @@ class StackedBarChart {
     this.chartTitle = obj.chartTitle
     this.showValue = obj.showValue
     this.textColour = obj.textColour
+    this.legendXAxis = obj.legendXAxis
+    this.legendYAxis = obj.legendYAxis
+    this.legendPadding = obj.legendPadding
 // Scaling
 
 this.maxValue = 0;
@@ -49,6 +52,14 @@ for (let i = 0; i < this.data.length; i++) {
 
 
   render(){
+    push()
+    textFont(fontBold)
+    noStroke()
+    textSize(40)
+    fill(this.textColour)
+    text(this.chartTitle,this.chartWidth,this.chartHeight/4)
+    pop()
+    push()
     // if max value / numticks = 0 stop, else add 1 to max value
     if (this.rounding) {
       let remainder = this.maxValue % this.numTicks;
@@ -58,6 +69,44 @@ for (let i = 0; i < this.data.length; i++) {
       }
       console.log(this.scale)
     }
+// Legend
+push()
+
+    for(let i = 0;i<1;i++){
+      translate(this.legendXAxis,this.legendYAxis)
+      fill(this.fillColours[i])
+      noStroke()
+      rect(this.chartWidth,80,20,20)
+      textFont(fontThin)
+      text(this.yValues[0][0].Sex,this.chartWidth+this.legendPadding,this.legendYAxis-35)
+
+    }
+    pop()
+    push()
+
+    for(let i = 0;i<1;i++){
+      noStroke()
+      translate(this.legendXAxis,this.legendYAxis+this.legendPadding)
+      fill(this.fillColours2[i])
+      rect(this.chartWidth,80,20,20)
+      textFont(fontThin)
+      text("Average",this.chartWidth+this.legendPadding,this.legendYAxis-95)
+
+    }
+    pop()
+
+    push()
+
+    for(let i = 0;i<1;i++){
+      noStroke()
+      translate(this.legendXAxis,this.legendYAxis+this.legendPadding)
+      fill(this.barFill)
+      ellipse(this.chartWidth+10,30,10,10)
+      textFont(fontThin)
+      text(this.yValues[1][1].Sex,this.chartWidth+this.legendPadding,this.legendYAxis-35)
+
+    }
+    pop()
 
 
     stroke(this.axisLineColour)
@@ -100,12 +149,15 @@ for (let i = 0; i < this.data.length; i++) {
       text(yValue, -15, 0);
       
       pop();
+      
 
   }
+  
 // bars                                       
     let gap = (this.chartWidth - (this.data.length * this.barWidth))/(this.data.length+1)
     push()
     translate(gap,0);
+    
 
     for (let i = 0; i < this.data.length; i++) {
       push();
@@ -126,7 +178,7 @@ for (let i = 0; i < this.data.length; i++) {
 
       stroke(255); // Set line color
         if(this.avgValue){
-          fill(255,0,0)
+          fill(this.barFill)
           ellipse(this.barWidth/2, -avgHeight, 10, 10);
         }
       pop();
@@ -150,7 +202,12 @@ for (let i = 0; i < this.data.length; i++) {
      text(this.data[i][this.xLabelName], -this.barWidth, 30);
      pop()
     }
+    translate(0,gap )
+
+
     pop()
+    pop()
+    
   }
 
   
